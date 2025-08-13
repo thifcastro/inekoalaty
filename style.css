@@ -1,0 +1,103 @@
+:root{
+  --blue:#1E90FF;
+  --pink:#ff69b4;
+  --bg:#f5f6fa;
+  --card:#fff;
+  --muted:#666;
+  --ok:#2e7d32;
+  --warn:#b00020;
+  --ghost:#eef3ff;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg); color:#222;
+}
+a{color:var(--blue); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+.site-header, .site-footer{
+  width:100%;
+  background:#fff;
+  border-bottom:1px solid #eee;
+  padding:12px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.site-footer{border-top:1px solid #eee; border-bottom:0; margin-top:24px}
+
+.brand{font-weight:700}
+.page{max-width:1000px; margin:16px auto; padding:0 12px}
+.page.narrow{max-width:880px}
+
+.card{
+  background:var(--card);
+  border:1px solid #eee;
+  border-radius:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.05);
+  padding:16px 18px;
+  margin:12px 0;
+}
+
+.btn{
+  display:inline-block;
+  background:#007bff; color:#fff;
+  border:0; padding:10px 14px;
+  border-radius:10px; cursor:pointer;
+  transition:.2s;
+}
+.btn:hover{background:#0056b3}
+.btn.ghost{
+  background:var(--ghost); color:#1a3daa;
+}
+.btn.ghost:hover{background:#e1e9ff}
+
+/* Cores auxiliares */
+.alice-color{color:var(--pink)}
+.bazza-color{color:var(--blue)}
+.winner-color{color:var(--ok)}
+.muted{color:var(--muted)}
+
+/* Elementos do jogo */
+.container{padding:20px}
+.description h1{margin:0 0 8px}
+.rules-summary h3{margin:0 0 8px; color:var(--blue)}
+.rules-summary ul{list-style:none; padding:0; margin:8px 0 0}
+.rules-summary li{margin:6px 0}
+
+.game-info{display:grid; gap:12px}
+.lambda-row{display:grid; gap:8px}
+.quick-lambda{display:flex; gap:8px; flex-wrap:wrap}
+.chip{
+  border:1px solid #d7e0ff; background:#f7f9ff; color:#2a3b8f;
+  padding:6px 10px; border-radius:999px; cursor:pointer;
+}
+.chip:hover{background:#eef3ff}
+.actions{margin-top:6px}
+
+input[type=number]{
+  padding:10px; border-radius:10px; border:1px solid #ddd; width:180px;
+}
+
+.banner{
+  border-radius:10px; padding:10px 14px; font-weight:600;
+  background:#f9f9f9; border:1px solid #eee; color:#333;
+}
+
+#gameStatus.turn-alice{color:var(--pink); font-weight:700}
+#gameStatus.turn-bazza{color:var(--blue); font-weight:700}
+#winnerMessage{color:var(--ok)}
+
+.input-area{display:flex; gap:8px; align-items:center; margin:8px 0; flex-wrap:wrap}
+.limits{margin:6px 0 2px; color:#444; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+.warn{color:var(--warn)}
+
+.game-stats{margin-top:10px; background:#fafafa; border:1px solid #eee; border-radius:10px; padding:12px}
+.game-stats .row{display:flex; gap:16px; justify-content:space-between; flex-wrap:wrap}
+.small{color:var(--muted)}
+
+.strategy details{margin-top:10px}
+.strategy .grid{display:flex; gap:8px; flex-wrap:wrap}

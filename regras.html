@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inekoalaty — Regras detalhadas</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [['\\(','\\)'], ['$','$']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Inekoalaty — Regras</div>
+    <nav>
+      <a class="btn ghost" href="index.html">Voltar ao jogo</a>
+    </nav>
+  </header>
+
+  <main class="page narrow">
+    <article class="card">
+      <h1>Regras detalhadas</h1>
+      <p>
+        Em turnos alternados, os jogadores escolhem \(x_n \ge 0\). Definimos
+        \(S_n=\sum_{i=1}^n x_i\) (soma) e \(Q_n=\sum_{i=1}^n x_i^2\) (soma dos quadrados).
+      </p>
+
+      <h2>Condições por turno</h2>
+      <ul>
+        <li><strong>Alice</strong> (n ímpar): deve manter \(S_n \le \lambda n\).</li>
+        <li><strong>Bazza</strong> (n par): deve manter \(Q_n \le n\).</li>
+        <li>Quem não puder jogar legalmente, perde.</li>
+      </ul>
+
+      <h2>Resultado conforme \(\lambda\)</h2>
+      <p class="banner">
+        <strong>Classificação:</strong>
+        se \(\lambda < \frac{\sqrt{2}}{2}\) Bazza vence; se \(\lambda > \frac{\sqrt{2}}{2}\) Alice vence;
+        no limiar \(\lambda=\frac{\sqrt{2}}{2}\) o jogo pode durar indefinidamente (empate).
+      </p>
+
+      <h2>Estratégias canônicas</h2>
+      <h3>Empate no limiar \(\lambda=\tfrac{\sqrt{2}}{2}\)</h3>
+      <ul>
+        <li>Alice joga \(0\) em todos os turnos ímpares.</li>
+        <li>Bazza joga \(\sqrt{2}\) em todos os turnos pares.</li>
+        <li>Isso mantém \(S_{2k}=k\sqrt{2}\) e \(Q_{2k}=2k\), sempre dentro dos limites.</li>
+      </ul>
+
+      <h3>Bazza vence, \(\lambda<\tfrac{\sqrt{2}}{2}\)</h3>
+      <p>
+        Jogando sempre o <em>máximo permitido</em> no par \(n=2k\),
+        \(x_{2k}= \sqrt{\max(0,\,2k-Q_{2k-1})}\), Bazza força \(Q_{2k}=2k\).
+        Mostra-se por estimativas que para \(k\) grande, \(S_{2k} > \lambda(2k+1)\), impedindo o próximo lance de Alice.
+      </p>
+
+      <h3>Alice vence, \(\lambda>\tfrac{\sqrt{2}}{2}\)</h3>
+      <p>
+        Alice poupa lances (joga 0) e em um turno ímpar adequado joga
+        \(x_{2k-1}=\lambda(2k-1)-S_{2k-2}\) suficientemente grande para que
+        \(Q_{2k-1}>2k\). No turno seguinte, Bazza não consegue jogar.
+      </p>
+
+      <h2>Dicas rápidas de uso</h2>
+      <ul>
+        <li>Use o botão “Usar \(\lambda=\tfrac{\sqrt{2}}{2}\)” para ir direto ao limiar.</li>
+        <li>“Jogar melhor resposta” preenche automaticamente o maior \(x_n\) permitido no turno.</li>
+        <li>O modo automático ilustra a sequência de empate por até 20 rodadas.</li>
+      </ul>
+
+      <p class="muted">Dica: abra o jogo em outra aba e vá consultando as regras aqui.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <a href="index.html">Voltar ao jogo</a>
+  </footer>
+</body>
+</html>

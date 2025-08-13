@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inekoalaty Game</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- MathJax (renderização LaTeX inline com \( ... \)) -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['\\(','\\)'], ['$','$']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Jogo -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Inekoalaty Game</div>
+    <nav>
+      <a class="btn ghost" href="regras.html">Regras detalhadas</a>
+      <a class="btn" href="#" id="goStart">Iniciar Jogo</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="description card">
+      <h1>Inekoalaty Game</h1>
+      <p>
+        Explore o problema da IMO (P5, 66ª edição) jogando como
+        <span class="alice-color">Alice</span> e <span class="bazza-color">Bazza</span>.
+        Defina <strong>\(\lambda\)</strong>, jogue manualmente, ou veja o
+        <em>modo automático</em> demonstrando empate no limiar \(\lambda=\frac{\sqrt{2}}{2}\).
+      </p>
+    </section>
+
+    <section class="rules-summary card">
+      <h3>Resumo das regras</h3>
+      <ul>
+        <li><span class="alice-color">Alice</span> (turnos ímpares): escolher \(x_n \ge 0\) com \(S_n=\sum_{i=1}^n x_i \le \lambda\,n\).</li>
+        <li><span class="bazza-color">Bazza</span> (turnos pares): escolher \(x_n \ge 0\) com \(Q_n=\sum_{i=1}^n x_i^2 \le n\).</li>
+        <li><span class="winner-color">Quem ficar sem jogada válida perde.</span> No limiar \(\lambda=\frac{\sqrt{2}}{2}\), há estratégia de empate.</li>
+      </ul>
+    </section>
+
+    <section class="container card">
+      <div class="game-info">
+        <div class="lambda-row">
+          <label for="lambdaInput">Escolha \(\lambda > 0\):</label>
+          <input type="number" id="lambdaInput" step="0.01" min="0.01" value="0.75" />
+          <div class="quick-lambda">
+            <button class="chip" data-lambda="0.6">0.60</button>
+            <button class="chip" data-lambda="0.70710678">\( \tfrac{\sqrt{2}}{2} \)</button>
+            <button class="chip" data-lambda="0.9">0.90</button>
+            <button class="chip" data-lambda="1.2">1.20</button>
+          </div>
+        </div>
+
+        <div id="theoryBanner" class="banner"></div>
+
+        <div class="actions">
+          <button id="startGameBtn" class="btn">Iniciar Jogo</button>
+        </div>
+      </div>
+
+      <div id="gameplay" style="display:none;">
+        <p id="gameStatus" class=""></p>
+        <p id="playerTurn"></p>
+
+        <div class="input-area">
+          <label for="moveInput">Sua jogada:</label>
+          <input type="number" id="moveInput" step="0.001" min="0" />
+          <button id="makeMoveBtn" class="btn" disabled>Jogar</button>
+          <button id="bestMoveBtn" class="btn ghost">Jogar melhor resposta</button>
+        </div>
+
+        <div class="limits">
+          <span id="limitText"></span>
+          <span id="warnText" class="warn"></span>
+        </div>
+
+        <div class="game-stats">
+          <div class="row">
+            <div>Rodada: <strong id="roundNumber">0</strong></div>
+            <div>\(S_n\): <strong id="sumS">0</strong></div>
+            <div>\(Q_n\): <strong id="sumQ">0</strong></div>
+          </div>
+          <div class="row small">
+            <div>Último \(x_n\): <span id="lastValidMove">—</span></div>
+            <div>Histórico: <span id="historyList">—</span></div>
+          </div>
+        </div>
+
+        <div class="strategy">
+          <details>
+            <summary>Estratégias rápidas</summary>
+            <div class="grid">
+              <button id="safeLambdaBtn" class="btn ghost" title="Sugerir \(\lambda\) crítico">Usar \(\lambda = \tfrac{\sqrt{2}}{2}\)</button>
+              <button id="aliceZeroBtn" class="btn ghost" title="Lance seguro (limiar)">Alice joga 0 (ímpar)</button>
+              <button id="bazzaRoot2Btn" class="btn ghost" title="Lance seguro (limiar)">Bazza joga \(\sqrt{2}\) (par)</button>
+              <button id="autoPlayBtn" class="btn" title="Demonstra o empate no limiar">Modo Auto (Empate)</button>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div id="gameOver" style="display:none;">
+        <h2 id="winnerMessage"></h2>
+        <button id="restartGameBtn" class="btn">Jogar Novamente</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="regras.html">Regras detalhadas</a>
+  </footer>
+
+  <script>
+    // Atalho do topo para iniciar o jogo
+    document.getElementById('goStart')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('startGameBtn')?.click();
+      window.scrollTo({ top: document.querySelector('.container').offsetTop - 12, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
